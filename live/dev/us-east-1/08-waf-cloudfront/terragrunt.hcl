@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../../../modules/waf-cloudfront"
+  source = "../../../../modules//waf-cloudfront"
 }
 
 inputs = {
