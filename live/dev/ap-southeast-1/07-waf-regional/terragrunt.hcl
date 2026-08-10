@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../../../modules/waf-regional"
+  source = "../../../../modules//waf-regional"
 }
 
 inputs = {
@@ -12,8 +12,8 @@ inputs = {
   tier        = "dev"
   aws_region  = "ap-southeast-1"
 
-  waf_alb_arn        = "REPLACE_WITH_DEV_API_ALB_ARN"
-  monitoring_alb_arn = "REPLACE_WITH_DEV_API_ALB_ARN"
+  waf_alb_arn        = "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
+  monitoring_alb_arn = "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
 
   waf_alb_rate_limit                        = 700000
   waf_alb_evaluation_window_sec             = 60
