@@ -10,6 +10,7 @@ variable "vpc_id" {
 }
 variable "private_subnets" {
   description = "Private subnet IDs. Sourced from the networking unit's aws_subnets_private output."
+  type = list(string)
 }
 variable "secure_sg" {
   description = "Secure security group ID. Sourced from the networking unit's secure_sg_id output."
@@ -24,6 +25,7 @@ variable "cms_sg_id" {
 # EKS
 variable "fargate_profile" {
   description = "List of Fargate profile namespaces."
+  type = list(string)
 }
 variable "eks_iam_user" {
   type = list(string)

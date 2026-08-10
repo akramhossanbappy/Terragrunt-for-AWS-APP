@@ -1,2 +1,4 @@
 /live/dev/ap-southeast-1/01-networking/.terragrunt-cache
 live/dev/ap-southeast-1/01-networking/.terraform.lock.hcl
+/live/dev/ap-southeast-1/02-cluster/.terragrunt-cache
+live/dev/ap-southeast-1/02-cluster/.terraform.lock.hcl

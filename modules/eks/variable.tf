@@ -16,6 +16,7 @@ variable "tier" {
 
 variable "private_subnets" {
   description = "id of private subnets"
+  type = list(string)
 }
 variable "fargate_profile" {
   description = "name ofeks fargate_profile"
