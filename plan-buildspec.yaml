@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      # installing terraform binary
+      - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/1.12.0/terraform_1.12.0_linux_amd64.zip"
+      - unzip -o terraform.zip -d /usr/bin/
+      - chmod +x /usr/bin/terraform
+      # installing terragrunt binary — bump TERRAGRUNT_VERSION together with
+      # the required_version pin in projects/live/production/terragrunt.hcl
+      - export TERRAGRUNT_VERSION=0.83.2
+      - "curl -s -qL -o terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64"
+      - chmod +x terragrunt
+      - mv terragrunt /usr/bin/
+      #  - aws eks update-kubeconfig --name tfdemo-production --region ap-southeast-1
+
+  build:
+    commands:
+      - terraform version
+      - terragrunt --version
+      - cd projects/live/production
+      - terragrunt run-all init --terragrunt-non-interactive
+      - terragrunt run-all plan --terragrunt-non-interactive

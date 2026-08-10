@@ -1,0 +1,16 @@
+/live/dev/ap-southeast-1/01-networking/.terragrunt-cache
+live/dev/ap-southeast-1/01-networking/.terraform.lock.hcl
+/live/dev/ap-southeast-1/02-cluster/.terragrunt-cache
+live/dev/ap-southeast-1/02-cluster/.terraform.lock.hcl
+/live/dev/ap-southeast-1/03-data/.terragrunt-cache
+live/dev/ap-southeast-1/03-data/.terraform.lock.hcl
+/live/dev/ap-southeast-1/04-delivery/.terragrunt-cache
+live/dev/ap-southeast-1/04-delivery/.terraform.lock.hcl
+/live/dev/ap-southeast-1/05-monitoring/.terragrunt-cache
+live/dev/ap-southeast-1/05-monitoring/.terraform.lock.hcl
+/live/dev/us-east-1/08-waf-cloudfront/.terragrunt-cache
+/live/dev/ap-southeast-1/06-static-sites/.terragrunt-cache
+live/dev/ap-southeast-1/06-static-sites/.terraform.lock.hcl
+/live/dev/ap-southeast-1/07-waf-regional/.terragrunt-cache
+live/dev/ap-southeast-1/07-waf-regional/.terraform.lock.hcl
+live/dev/us-east-1/08-waf-cloudfront/.terraform.lock.hcl
