@@ -18,7 +18,7 @@ dependency "networking" {
 }
 
 terraform {
-  source = "../../../../modules/data"
+  source = "../../../../modules//data"
 }
 
 inputs = {

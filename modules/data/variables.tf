@@ -7,12 +7,14 @@ variable "aws_region" {}
 # From the networking unit (module.vpc outputs)
 variable "secure_subnets" {
   description = "Secure subnet IDs. Sourced from the networking unit's aws_subnets_secure output. Shared by elasticache-cluster-01 and opensearch, same as today's root main.tf."
+  type = list(string)
 }
 variable "secure_sg_id" {
   description = "Secure security group ID. Sourced from the networking unit's secure_sg_id output. Shared by elasticache-cluster-01 and opensearch."
 }
 variable "private_subnets" {
   description = "Private subnet IDs. Sourced from the networking unit's aws_subnets_private output."
+  type = list(string)
 }
 variable "efs_sg" {
   description = "EFS security group ID. Sourced from the networking unit's efs_sg_id output."
@@ -25,6 +27,7 @@ variable "kibana_alb_sg_id" {
 }
 variable "public_subnets" {
   description = "Public subnet IDs. Sourced from the networking unit's aws_subnets_public output."
+  type = list(string)
 }
 
 # ElastiCache 01

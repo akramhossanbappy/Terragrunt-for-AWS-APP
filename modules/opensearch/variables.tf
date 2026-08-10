@@ -1,4 +1,6 @@
-variable "secure_subnets" {}
+variable "secure_subnets" {
+  type = list(string)
+}
 variable "secure_sg_id" {}
 variable "project" {}
 variable "environment" {}
