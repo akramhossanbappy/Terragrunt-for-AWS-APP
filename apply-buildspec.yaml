@@ -12,7 +12,7 @@ phases:
       - "curl -s -qL -o terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64"
       - chmod +x terragrunt
       - mv terragrunt /usr/bin/
-      #  - aws eks update-kubeconfig --name singleapp-production --region ap-southeast-1
+      #  - aws eks update-kubeconfig --name tfdemo-production --region ap-southeast-1
 
   build:
     commands:

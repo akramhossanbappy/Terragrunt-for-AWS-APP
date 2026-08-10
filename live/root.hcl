@@ -58,7 +58,7 @@ locals {
 
     # Common tagging values
     default_tags = {
-      Project   = "singleapp"
+      Project   = "tfdemo"
       ManagedBy = "terragrunt"
       CreatedBy = "terraform"
     }

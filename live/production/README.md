@@ -1,17 +1,17 @@
 # Production environment
 
-Active AWS environment. Project `singleapp`, account `487542879553`,
+Active AWS environment. Project `tfdemo`, account `487542879553`,
 region `ap-southeast-1`. State backend is
-`singleapp-fifa-terraform-state-bucket-production` (already configured in
+`tfdemo-fifa-terraform-state-bucket-production` (already configured in
 `production/terragrunt.hcl`).
 
 ## Layout
 
 ```
 production/
-├── terragrunt.hcl        ← env root — project=singleapp,
+├── terragrunt.hcl        ← env root — project=tfdemo,
 │                            environment=prod, tier=production,
-│                            state_bucket=singleapp-fifa-terraform-state-
+│                            state_bucket=tfdemo-fifa-terraform-state-
 │                            bucket-production (terminal; auto-loaded by
 │                            descendant units).
 ├── ap-southeast-1/       ← ap-southeast-1 region root
@@ -59,7 +59,7 @@ been applied; otherwise the dependency's `mock_outputs` fallback is used
 Each unit gets its own state file at:
 
 ```
-s3://singleapp-fifa-terraform-state-bucket-production/production/<region>/<unit>/terraform.tfstate
+s3://tfdemo-fifa-terraform-state-bucket-production/production/<region>/<unit>/terraform.tfstate
 ```
 
 This split is deliberate — the production stack used to share a single

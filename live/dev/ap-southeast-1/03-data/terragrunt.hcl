@@ -30,12 +30,12 @@ inputs = {
   kibana_alb_sg_id = dependency.networking.outputs.kibana_alb_sg_id
   public_subnets   = dependency.networking.outputs.aws_subnets_public
 
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "dev"
   tier        = "dev"
   aws_region  = "ap-southeast-1"
 
-  elasticache_cluster_01_name           = "singleapp-dev"
+  elasticache_cluster_01_name           = "tfdemo-dev"
   elasticache_cluster_01_engine_version = "7.1"
   elasticache_cluster_01_node_type      = "cache.t3.micro"
   replicas_count                        = "0"

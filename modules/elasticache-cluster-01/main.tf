@@ -39,13 +39,13 @@ resource "aws_elasticache_replication_group" "elasticache_cluster_01" {
   apply_immediately          = true
 
   log_delivery_configuration {
-    destination      = "/aws/elasticache/singleapp-fifa-production"
+    destination      = "/aws/elasticache/tfdemo-fifa-production"
     destination_type = "cloudwatch-logs"
     log_format       = "json"
     log_type         = "engine-log"
   }
   log_delivery_configuration {
-    destination      = "/aws/elasticache/singleapp-fifa-production"
+    destination      = "/aws/elasticache/tfdemo-fifa-production"
     destination_type = "cloudwatch-logs"
     log_format       = "json"
     log_type         = "slow-log"

@@ -495,7 +495,7 @@ resource "aws_security_group" "kibana_alb_sg" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["202.134.12.117/32"]
-    description = "Singleapp-Production-Cluster"
+    description = "tfdemo-Production-Cluster"
   }
   ingress {
     from_port   = 443
@@ -509,7 +509,7 @@ resource "aws_security_group" "kibana_alb_sg" {
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["202.134.12.43/32"]
-    description = "Singleapp-Staging-Cluster"
+    description = "tfdemo-Staging-Cluster"
   }
   ingress {
     from_port   = 443

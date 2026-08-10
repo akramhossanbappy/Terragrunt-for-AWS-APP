@@ -18,7 +18,7 @@ terraform {
 inputs = {
   web_acl_id = dependency.waf_cloudfront.outputs.web_acl_arn
 
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "dev"
   tier        = "dev"
   aws_region  = "ap-southeast-1"

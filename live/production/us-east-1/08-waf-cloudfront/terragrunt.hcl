@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "prod"
   tier        = "production"
   aws_region  = "us-east-1"
@@ -35,8 +35,8 @@ inputs = {
   waf_enable_logging     = true
   waf_log_retention_days = 30
 
-  monitoring_waf_cloudfront_name      = "singleapp-waf-cloudfront-prod"
-  monitoring_waf_cloudfront_log_group = "aws-waf-logs-singleapp-cloudfront-prod"
+  monitoring_waf_cloudfront_name      = "tfdemo-waf-cloudfront-prod"
+  monitoring_waf_cloudfront_log_group = "aws-waf-logs-tfdemo-cloudfront-prod"
 
   gchat_webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA2phmPyI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=BH4i0Snua9FlE3nlSarqz06COVpaJXfocLfg6n0oYPI"
 }

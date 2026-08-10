@@ -8,7 +8,7 @@ terraform {
 
 inputs = {
   environment = "prod"
-  project     = "singleapp"
+  project     = "tfdemo"
   tier        = "production"
 
   vpc_cidr                   = "10.0.0.0/16"

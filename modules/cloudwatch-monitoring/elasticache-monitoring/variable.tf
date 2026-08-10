@@ -11,13 +11,13 @@ variable "replication_group_id" {
 }
 
 variable "primary_cluster_ids" {
-  description = "List of PRIMARY node CacheClusterIds (e.g. singleapp-fifa-prod-0001-001). Used for CPU, memory, evictions, and connection alarms. CloudWatch metric math is capped at 10 data queries — keep this list ≤ 9 entries. Verify IDs from AWS Console → ElastiCache → Nodes tab."
+  description = "List of PRIMARY node CacheClusterIds (e.g. tfdemo-fifa-prod-0001-001). Used for CPU, memory, evictions, and connection alarms. CloudWatch metric math is capped at 10 data queries — keep this list ≤ 9 entries. Verify IDs from AWS Console → ElastiCache → Nodes tab."
   type        = list(string)
   default     = []
 }
 
 variable "replica_cluster_ids" {
-  description = "List of REPLICA node CacheClusterIds (e.g. singleapp-fifa-prod-0001-002). Used exclusively for the ReplicationLag alarm. Keep ≤ 9 entries (CloudWatch 10-query limit)."
+  description = "List of REPLICA node CacheClusterIds (e.g. tfdemo-fifa-prod-0001-002). Used exclusively for the ReplicationLag alarm. Keep ≤ 9 entries (CloudWatch 10-query limit)."
   type        = list(string)
   default     = []
 }

@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  project         = "singleapp"
+  project         = "tfdemo"
   environment     = "dev"
   cls_environment = "dev"
   tier            = "dev"
@@ -21,7 +21,7 @@ inputs = {
   github_codeconnection_arn = "REPLACE_WITH_DEV_GITHUB_CODECONNECTION_ARN"
   github_url                = "https://github.com/"
   github_workspace          = "REPLACE_WITH_DEV_GITHUB_WORKSPACE"
-  github_repository         = ["engagement", "single-app-fifa-static", "fluentd", "single-app-fifa-deeplink", "singleapp-fifa-cron-worker"]
+  github_repository         = ["engagement", "single-app-fifa-static", "fluentd", "single-app-fifa-deeplink", "tfdemo-fifa-cron-worker"]
   github_branch_pp          = "dev"
   github_branch             = "main"
 }

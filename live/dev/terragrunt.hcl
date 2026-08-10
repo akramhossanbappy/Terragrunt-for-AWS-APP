@@ -9,7 +9,7 @@
 # labels, and per-env overrides merged onto the shared common_defaults.
 
 locals {
-  project                = "singleapp"
+  project                = "tfdemo"
   environment            = "dev"
   tier                   = "dev"
   s3_state_bucket_region = "ap-southeast-1"

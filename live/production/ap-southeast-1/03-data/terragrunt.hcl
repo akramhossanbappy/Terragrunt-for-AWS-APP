@@ -30,7 +30,7 @@ inputs = {
   kibana_alb_sg_id = dependency.networking.outputs.kibana_alb_sg_id
   public_subnets   = dependency.networking.outputs.aws_subnets_public
 
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "prod"
   tier        = "production"
   aws_region  = "ap-southeast-1"

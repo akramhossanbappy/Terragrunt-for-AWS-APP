@@ -26,7 +26,7 @@ inputs = {
   alb_sg_id       = dependency.networking.outputs.alb_sg_id
   cms_sg_id       = dependency.networking.outputs.cms_sg_id
 
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "prod"
   tier        = "production"
   aws_region  = "ap-southeast-1"

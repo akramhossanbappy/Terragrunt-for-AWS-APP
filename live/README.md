@@ -21,7 +21,7 @@ the unit's effective configuration.
 | dev       | yes              | ap-southeast-1, us-east-1 (8 units) | `REPLACE_WITH_DEV_STATE_BUCKET` (placeholder — see below)  |
 | staging   | placeholder      | ap-southeast-1, us-east-1 (no units) | `REPLACE_WITH_STAGING_STATE_BUCKET` (placeholder — see below) |
 | preprod   | placeholder      | ap-southeast-1, us-east-1 (no units) | `REPLACE_WITH_PREPROD_STATE_BUCKET` (placeholder — see below) |
-| production| yes              | ap-southeast-1, us-east-1 (8 units) | `singleapp-fifa-terraform-state-bucket-production`         |
+| production| yes              | ap-southeast-1, us-east-1 (8 units) | `tfdemo-fifa-terraform-state-bucket-production`         |
 
 Production is the active stack. dev mirrors production with waf toggles off
 and a placeholder state bucket. staging and preprod are skeleton trees —

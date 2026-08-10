@@ -14,7 +14,7 @@ below.
 The existing state lives at:
 
 ```
-s3://singleapp-fifa-terraform-state-bucket-production/terraform.tfstate
+s3://tfdemo-fifa-terraform-state-bucket-production/terraform.tfstate
 ```
 
 Every resource currently in AWS is tracked there under one root. Simply

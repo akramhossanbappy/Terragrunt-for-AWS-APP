@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "dev"
   tier        = "dev"
 

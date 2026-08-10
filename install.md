@@ -1,6 +1,6 @@
 # Running this repo against the real AWS account
 
-Target: **singleapp / FIFA**, account `487542879553`, region `ap-southeast-1`
+Target: **tfdemo / FIFA**, account `487542879553`, region `ap-southeast-1`
 (`waf-cloudfront` deploys to `us-east-1`). This is the production
 environment — `plan` is safe/read-only, `apply` changes real infrastructure.
 
@@ -89,7 +89,7 @@ aws sts get-caller-identity
 ```
 
 The credentials need permission to read/write the state bucket
-(`singleapp-fifa-terraform-state-bucket-production`) and to manage every
+(`tfdemo-fifa-terraform-state-bucket-production`) and to manage every
 resource type the modules under `projects/modules/` touch (VPC, EKS, ECR,
 CodePipeline/CodeBuild, ElastiCache, EFS, OpenSearch, S3, CloudFront, WAFv2,
 CloudWatch, Lambda, IAM, etc.).

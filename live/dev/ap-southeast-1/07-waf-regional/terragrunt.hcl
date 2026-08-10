@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  project     = "singleapp"
+  project     = "tfdemo"
   environment = "dev"
   tier        = "dev"
   aws_region  = "ap-southeast-1"
@@ -37,8 +37,8 @@ inputs = {
   waf_enable_logging     = true
   waf_log_retention_days = 30
 
-  monitoring_waf_alb_name      = "singleapp-waf-alb-dev"
-  monitoring_waf_alb_log_group = "aws-waf-logs-singleapp-alb-dev"
+  monitoring_waf_alb_name      = "tfdemo-waf-alb-dev"
+  monitoring_waf_alb_log_group = "aws-waf-logs-tfdemo-alb-dev"
 
   gchat_webhook_url = "REPLACE_WITH_DEV_GCHAT_WEBHOOK_URL"
 }
