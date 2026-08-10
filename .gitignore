@@ -6,3 +6,5 @@ live/dev/ap-southeast-1/02-cluster/.terraform.lock.hcl
 live/dev/ap-southeast-1/03-data/.terraform.lock.hcl
 /live/dev/ap-southeast-1/04-delivery/.terragrunt-cache
 live/dev/ap-southeast-1/04-delivery/.terraform.lock.hcl
+/live/dev/ap-southeast-1/05-monitoring/.terragrunt-cache
+live/dev/ap-southeast-1/05-monitoring/.terraform.lock.hcl

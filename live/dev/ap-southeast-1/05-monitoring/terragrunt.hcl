@@ -8,11 +8,16 @@ dependency "data" {
   mock_outputs = {
     elasticache_replication_group_id = "tfdemo-fifa-dev-mock"
   }
-  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan"
+  ]
 }
 
 terraform {
-  source = "../../../../modules/monitoring"
+  source = "../../../../modules//monitoring"
 }
 
 inputs = {
@@ -28,6 +33,7 @@ inputs = {
     "tfdemo-fifa-dev-0002-001",
     "tfdemo-fifa-dev-0003-001",
   ]
+
   monitoring_redis_replica_cluster_ids = [
     "tfdemo-fifa-dev-0001-002",
     "tfdemo-fifa-dev-0002-002",
