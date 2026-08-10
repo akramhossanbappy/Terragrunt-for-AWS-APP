@@ -5,10 +5,14 @@ variable "tier" {}
 variable "aws_region" {}
 
 # S3 static (reporting bucket)
-variable "s3_static_bucket" {}
+variable "s3_static_bucket" {
+  type=list(string)
+}
 
 # S3 + CloudFront static assets
-variable "s3_cdn_static_bucket" {}
+variable "s3_cdn_static_bucket" {
+  type = list(string)
+}
 variable "acm_cert_arn_static" {
   default = ""
 }
@@ -18,7 +22,9 @@ variable "cdn_extra_aliases" {
 }
 
 # S3 + CloudFront deeplink
-variable "s3_cdn_deeplink_bucket" {}
+variable "s3_cdn_deeplink_bucket" {
+  type = list(string)
+}
 variable "acm_cert_arn_deeplink" {
   default = ""
 }
