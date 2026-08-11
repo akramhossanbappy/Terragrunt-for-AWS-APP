@@ -125,3 +125,5 @@ Everything that was commented out in the old root `main.tf` — `documentdb`, `r
 - `modules/eks/main.tf_bkp` and `main.tf_bkp_20240305` (i.e. `projects/modules/eks/...`) are dead reference copies (non-`.tf` extension, ignored by Terraform) — do not edit expecting them to take effect.
 - `lambda/` (true repo root) is an empty placeholder directory, not a deployed Lambda.
 - `main.tf`, `variable.tf`, `output.tf`, `provider.tf`, `imports.tf`, `production.tfvars` at the true repo root (not under `projects/`) are the **pre-Terragrunt config**, kept temporarily as a migration fallback — see `MIGRATION.md`. Once the state cutover in that document is complete and verified, these get archived/deleted; don't build new work on top of them.
+
+will run from test
