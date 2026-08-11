@@ -1,4 +1,4 @@
-# Running this repo against the real AWS account
+# Running this repo against the real AWS account ap-southeast-1
 
 Target: **tfdemo / FIFA**, account `487542879553`, region `ap-southeast-1`
 (`waf-cloudfront` deploys to `us-east-1`). This is the production
