@@ -1,7 +1,7 @@
 locals {
   project     = "tfdemo"
-  environment = "dev"
-  tier        = "dev"
+  environment = "production"
+  tier        = "production"
 
   # Terraform state
   state_bucket           = "REPLACE_WITH_DEV_STATE_BUCKET"
@@ -23,7 +23,7 @@ locals {
   }
 
   environment_tags = {
-    Environment = "dev"
-    Tier        = "dev"
+    Environment = "production"
+    Tier        = "production"
   }
 }
