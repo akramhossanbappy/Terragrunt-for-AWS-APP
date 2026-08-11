@@ -23,3 +23,6 @@ live/dev/ap-southeast-1/.terraform.lock.hcl
 
 /*/*/*/*/.terragrunt-cache
 */*/*/*/.terraform.lock.hcl
+live/production/ap-southeast-1/07-waf-regional/.terraform.lock.hcl
+*.lock.hcl
+.terragrunt-cache/
