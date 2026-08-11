@@ -1,5 +1,15 @@
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
+}
+
+locals {
+  env_config = read_terragrunt_config(
+    find_in_parent_folders("env.hcl")
+  )
+
+  region_config = read_terragrunt_config(
+    find_in_parent_folders("region.hcl")
+  )
 }
 
 dependency "networking" {
@@ -14,14 +24,20 @@ dependency "networking" {
     efs_sg_id           = "sg-mockefs000000000"
     kibana_alb_sg_id    = "sg-mockkibana000000"
   }
-  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan"
+  ]
 }
 
 terraform {
-  source = "../../../../modules/data"
+  source = "../../../../modules//data"
 }
 
 inputs = {
+  # Networking
   vpc_id           = dependency.networking.outputs.vpc_id
   secure_subnets   = dependency.networking.outputs.aws_subnets_secure
   secure_sg_id     = dependency.networking.outputs.secure_sg_id
@@ -30,24 +46,25 @@ inputs = {
   kibana_alb_sg_id = dependency.networking.outputs.kibana_alb_sg_id
   public_subnets   = dependency.networking.outputs.aws_subnets_public
 
-  project     = "tfdemo"
-  environment = "prod"
-  tier        = "production"
-  aws_region  = "ap-southeast-1"
+  # Common environment
+  project     = local.env_config.locals.project
+  environment = local.env_config.locals.environment
+  tier        = local.env_config.locals.tier
 
-  # ElastiCache 01
-  elasticache_cluster_01_name           = "fifa"
+  # Region
+  aws_region = local.region_config.locals.aws_region
+
+  # ElastiCache
+  elasticache_cluster_01_name           = "tfdemo-dev"
   elasticache_cluster_01_engine_version = "7.1"
   elasticache_cluster_01_node_type      = "cache.t3.micro"
-  replicas_count                        = "0"
-  automatic_failover_enabled            = true
-  num_node_groups                       = 1
-  replicas_per_node_group               = 1
+
+  replicas_count             = 0
+  automatic_failover_enabled = true
+  num_node_groups             = 1
+  replicas_per_node_group     = 1
 
   # OpenSearch
-  # os_db_user / os_db_password intentionally omitted — injected at apply time
-  # via TF_VAR_os_db_user / TF_VAR_os_db_password from Secrets Manager (see
-  # "cicd-terraform (apply-from-local)/main.tf"), same as before this migration.
   opensearch_instance_type           = "r7g.medium.search"
   opensearch_instance_count          = 1
   opensearch_volume_size             = 600
@@ -55,6 +72,11 @@ inputs = {
   opensearch_zone_awareness_enabled  = false
   opensearch_availability_zone_count = 2
 
-  # Kibana
-  kibana_certificate_arn = "arn:aws:acm:ap-southeast-1:487542879553:certificate/ea3961a5-fd12-4eee-8680-b8654f9d5710"
+  # Kibana ALB
+  create_kibana_alb = false
+
+  kibana_certificate_arn = "arn:aws:acm:us-east-1:487542879553:certificate/dd7e8e2d-c99f-4e71-b37f-743d0131765c"
+
+  # os_db_user / os_db_password intentionally omitted
+  # Inject with TF_VAR_os_db_user / TF_VAR_os_db_password
 }

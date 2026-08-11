@@ -1,49 +1,63 @@
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
+}
+
+locals {
+  env_config = read_terragrunt_config(
+    find_in_parent_folders("env.hcl")
+  )
+
+  region_config = read_terragrunt_config(
+    find_in_parent_folders("region.hcl")
+  )
 }
 
 dependency "data" {
   config_path = "../03-data"
 
   mock_outputs = {
-    elasticache_replication_group_id = "tfdemo-fifa-prod-mock"
+    elasticache_replication_group_id = "tfdemo-fifa-dev-mock"
   }
-  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+
+  mock_outputs_allowed_terraform_commands = [
+    "init",
+    "validate",
+    "plan"
+  ]
 }
 
 terraform {
-  source = "../../../../modules/monitoring"
+  source = "../../../../modules//monitoring"
 }
 
 inputs = {
+  # Dependency output
   elasticache_replication_group_id = dependency.data.outputs.elasticache_replication_group_id
 
-  project     = "tfdemo"
-  environment = "prod"
-  tier        = "production"
-  aws_region  = "ap-southeast-1"
+  # Common environment values
+  project     = local.env_config.locals.project
+  environment = local.env_config.locals.environment
+  tier        = local.env_config.locals.tier
 
-  # Replication group: tfdemo-fifa-prod (6 shards × 2 nodes = 12 total)
-  # IMPORTANT: Verify node IDs from AWS Console → ElastiCache → tfdemo-fifa-prod → Nodes tab
-  # before applying. The -001 suffix = primary, -002 = replica (standard AWS naming).
+  # Region
+  aws_region = local.region_config.locals.aws_region
+
+  # Redis monitoring
   monitoring_redis_primary_cluster_ids = [
-    "tfdemo-fifa-prod-0001-001",
-    "tfdemo-fifa-prod-0002-001",
-    "tfdemo-fifa-prod-0003-001",
-    "tfdemo-fifa-prod-0004-001",
-    "tfdemo-fifa-prod-0005-001",
-    "tfdemo-fifa-prod-0006-001",
+    "tfdemo-fifa-dev-0001-001",
+    "tfdemo-fifa-dev-0002-001",
+    "tfdemo-fifa-dev-0003-001",
   ]
+
   monitoring_redis_replica_cluster_ids = [
-    "tfdemo-fifa-prod-0001-002",
-    "tfdemo-fifa-prod-0002-002",
-    "tfdemo-fifa-prod-0003-002",
-    "tfdemo-fifa-prod-0004-002",
-    "tfdemo-fifa-prod-0005-002",
-    "tfdemo-fifa-prod-0006-002",
+    "tfdemo-fifa-dev-0001-002",
+    "tfdemo-fifa-dev-0002-002",
+    "tfdemo-fifa-dev-0003-002",
   ]
 
-  monitoring_opensearch_domain_name = "tfdemo-os-prod"
+  # OpenSearch monitoring
+  monitoring_opensearch_domain_name = "tfdemo-os-dev"
 
-  gchat_webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA2phmPyI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=BH4i0Snua9FlE3nlSarqz06COVpaJXfocLfg6n0oYPI"
+  # Notification
+  gchat_webhook_url = "REPLACE_WITH_DEV_GCHAT_WEBHOOK_URL"
 }
