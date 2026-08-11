@@ -50,5 +50,6 @@ inputs = {
   opensearch_zone_awareness_enabled  = false
   opensearch_availability_zone_count = 2
 
-  kibana_certificate_arn = "REPLACE_WITH_DEV_KIBANA_CERT_ARN"
+  create_kibana_alb      = false
+  kibana_certificate_arn = "arn:aws:acm:us-east-1:487542879553:certificate/dd7e8e2d-c99f-4e71-b37f-743d0131765c"
 }

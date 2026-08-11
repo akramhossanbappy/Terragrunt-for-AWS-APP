@@ -83,3 +83,7 @@ variable "opensearch_availability_zone_count" {
 
 # Kibana
 variable "kibana_certificate_arn" {}
+variable "create_kibana_alb" {
+  type    = bool
+  default = false
+}
