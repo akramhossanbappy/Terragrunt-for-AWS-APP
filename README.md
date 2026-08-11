@@ -163,3 +163,5 @@ terragrunt run-all apply --terragrunt-non-interactive --terragrunt-parallelism 1
 
 `terragrunt run-all apply` with `-auto-approve` applies without a
 confirmation prompt — make sure `plan` output has been reviewed first.
+
+Will run from env or region
