@@ -19,5 +19,7 @@ live/dev/ap-southeast-1/.terraform.lock.hcl
 /live/preprod/ap-southeast-1/01-networking/.terragrunt-cache
 /live/preprod/ap-southeast-1/02-cluster/.terragrunt-cache
 /live/preprod/ap-southeast-1/03-data/.terragrunt-cache
+
+
 /*/*/*/*/.terragrunt-cache
 */*/*/*/.terraform.lock.hcl
