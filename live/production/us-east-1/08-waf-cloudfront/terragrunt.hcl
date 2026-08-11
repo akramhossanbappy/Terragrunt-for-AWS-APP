@@ -1,29 +1,43 @@
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
+}
+
+locals {
+  env_config = read_terragrunt_config(
+    find_in_parent_folders("env.hcl")
+  )
+
+  region_config = read_terragrunt_config(
+    find_in_parent_folders("region.hcl")
+  )
 }
 
 terraform {
-  source = "../../../../modules/waf-cloudfront"
+  source = "../../../../modules//waf-cloudfront"
 }
 
 inputs = {
-  project     = "tfdemo"
-  environment = "prod"
-  tier        = "production"
-  aws_region  = "us-east-1"
+  # Common environment values
+  project     = local.env_config.locals.project
+  environment = local.env_config.locals.environment
+  tier        = local.env_config.locals.tier
 
+  # Region
+  aws_region = local.region_config.locals.aws_region
+
+  # CloudFront WAF rate limit
   waf_cf_rate_limit = 2000
 
-  # Shared with the waf-regional unit's inputs (same values in the old root
-  # main.tf's production.tfvars, now duplicated since these are independent
-  # Terragrunt units/state files).
+  # IP controls
   waf_blocked_ips   = []
   waf_allowed_ips   = []
   waf_blocked_ipv6s = []
   waf_allowed_ipv6s = []
 
+  # WAF mode
   waf_count_mode_only = true
 
+  # AWS managed rules
   waf_enable_ip_reputation_list               = true
   waf_enable_common_rule_set                  = true
   waf_common_rule_body_size_override_to_count = true
@@ -32,11 +46,14 @@ inputs = {
   waf_enable_linux_rule_set                   = true
   waf_enable_php_rule_set                     = false
 
+  # Logging
   waf_enable_logging     = true
   waf_log_retention_days = 30
 
-  monitoring_waf_cloudfront_name      = "tfdemo-waf-cloudfront-prod"
-  monitoring_waf_cloudfront_log_group = "aws-waf-logs-tfdemo-cloudfront-prod"
+  # Monitoring
+  monitoring_waf_cloudfront_name      = "tfdemo-waf-cloudfront-dev"
+  monitoring_waf_cloudfront_log_group = "aws-waf-logs-tfdemo-cloudfront-dev"
 
-  gchat_webhook_url = "https://chat.googleapis.com/v1/spaces/AAAA2phmPyI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=BH4i0Snua9FlE3nlSarqz06COVpaJXfocLfg6n0oYPI"
+  # Notification
+  gchat_webhook_url = "REPLACE_WITH_DEV_GCHAT_WEBHOOK_URL"
 }

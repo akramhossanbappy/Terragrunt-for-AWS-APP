@@ -1,7 +1,7 @@
-# production / ap-southeast-1 region
+# dev / ap-southeast-1 region
 
-Region root for the production environment in AWS `ap-southeast-1`. Seven
-service units are deployed here:
+Region root for the dev environment in AWS `ap-southeast-1`. Seven service
+units are deployed here:
 
 | Unit            | Module              | Wraps                                                   |
 |-----------------|---------------------|---------------------------------------------------------|
@@ -39,12 +39,15 @@ Each unit's `dependency` block carries `mock_outputs` for `validate` /
 `plan`, so you can `terragrunt plan` a downstream unit before its
 dependency has been applied.
 
-`modules/data/main.tf` also adds an internal `depends_on = [module.opensearch]`
-on its `kibana-alb` module to close a latent first-apply race against the
-OpenSearch ENI lookup. See `../../CLAUDE.md` for the full story.
+## WAF in dev
+
+Dev's `waf_regional_enabled = false` (set in
+`dev/terragrunt.hcl`'s `settings = merge(...)`), so `07-waf-regional`
+does nothing in this env — but the unit directory is present so the
+production-shaped layout can be exercised end-to-end without WAF traffic
+hitting the dev ALB.
 
 ## See also
 
-- [`../../CLAUDE.md`](../../CLAUDE.md) — repo-wide conventions.
 - [`../../README.md`](../../README.md) — top-level pattern.
-- [`../README.md`](../README.md) — production env overview, per-unit state paths, WAF notes.
+- [`../README.md`](../README.md) — dev env overview, pre-flight, run.

@@ -1,44 +1,44 @@
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
 }
 
-dependency "waf_cloudfront" {
-  config_path = "../../us-east-1/08-waf-cloudfront"
+locals {
+  env_config = read_terragrunt_config(
+    find_in_parent_folders("env.hcl")
+  )
 
-  mock_outputs = {
-    web_acl_arn = "arn:aws:wafv2:us-east-1:487542879553:global/webacl/mock/00000000-0000-0000-000000000000"
-  }
-  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
+  region_config = read_terragrunt_config(
+    find_in_parent_folders("region.hcl")
+  )
 }
 
 terraform {
-  source = "../../../../modules/static-sites"
+  source = "../../../../modules//static-sites"
 }
 
 inputs = {
-  web_acl_id = dependency.waf_cloudfront.outputs.web_acl_arn
+  project     = local.env_config.locals.project
+  environment = local.env_config.locals.environment
+  tier        = local.env_config.locals.tier
+  aws_region  = local.region_config.locals.aws_region
 
-  project     = "tfdemo"
-  environment = "prod"
-  tier        = "production"
-  aws_region  = "ap-southeast-1"
+  s3_static_bucket = [
+    "REPLACE_WITH_DEV_STATIC_BUCKET_NAME"
+  ]
 
-  s3_static_bucket     = ["tfdemo-fifa-prod-reporting.robi.com.bd"]
-  s3_cdn_static_bucket = ["tfdemo-fifa-static-prod-cdn.robi.com.bd"]
-  acm_cert_arn_static  = "arn:aws:acm:us-east-1:487542879553:certificate/dd7e8e2d-c99f-4e71-b37f-743d0131765c"
-  cdn_extra_aliases = {
-    "tfdemo-fifa-static-prod-cdn.robi.com.bd" = [
-      "myairtel-fifa-static-prod.robi.com.bd",
-      "myrobi-fifa-static-prod.robi.com.bd",
-    ]
-  }
+  s3_cdn_static_bucket = [
+    "REPLACE_WITH_DEV_CDN_STATIC_BUCKET_NAME"
+  ]
 
-  s3_cdn_deeplink_bucket = ["tfdemo-fifa-deeplink-prod-cdn.robi.com.bd"]
-  acm_cert_arn_deeplink  = "arn:aws:acm:us-east-1:487542879553:certificate/dd7e8e2d-c99f-4e71-b37f-743d0131765c"
-  cdn_deeplink_extra_aliases = {
-    "tfdemo-fifa-deeplink-prod-cdn.robi.com.bd" = [
-      "myairtel-fifa-web-prod.robi.com.bd",
-      "myrobi-fifa-web-prod.robi.com.bd",
-    ]
-  }
+  acm_cert_arn_static = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+
+  cdn_extra_aliases = {}
+
+  s3_cdn_deeplink_bucket = [
+    "REPLACE_WITH_DEV_DEEPLINK_BUCKET_NAME"
+  ]
+
+  acm_cert_arn_deeplink = "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+
+  cdn_deeplink_extra_aliases = {}
 }

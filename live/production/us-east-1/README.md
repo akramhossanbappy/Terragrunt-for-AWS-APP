@@ -1,7 +1,7 @@
-# production / us-east-1 region
+# dev / us-east-1 region
 
-Region root for the production environment in AWS `us-east-1`. This region
-only hosts the CloudFront-scope WAF unit — CloudFront WAFs must live in
+Region root for the dev environment in AWS `us-east-1`. This region only
+hosts the CloudFront-scope WAF unit — CloudFront WAFs must live in
 `us-east-1` regardless of where the distributions themselves do.
 
 | Unit                 | Module                 | Wraps                                       |
@@ -29,17 +29,15 @@ WAF ACL must be created here. The `06-static-sites` unit's
 `dependency "waf-cloudfront"` block pulls `web_acl_arn` from this region's
 unit.
 
-## WAF
+## WAF in dev
 
-`08-waf-cloudfront` runs with `waf_count_mode_only = true` (observe, don't
-block) and is mirrored by `../ap-southeast-1/07-waf-regional`. Keep both
-units' `inputs` in sync by hand when changing IP allow/block lists,
-managed-rule-group toggles, or logging config — they intentionally
-duplicate those values.
+Dev's `waf_cloudfront_enabled = false` (set in `dev/terragrunt.hcl`'s
+`settings = merge(...)`), so `08-waf-cloudfront` does nothing in this env —
+but the unit directory is present so the production-shaped layout can be
+exercised end-to-end without WAF traffic hitting dev CloudFront.
 
 ## See also
 
-- [`../../CLAUDE.md`](../../CLAUDE.md) — repo-wide conventions.
 - [`../../README.md`](../../README.md) — top-level pattern.
-- [`../README.md`](../README.md) — production env overview.
-- [`../ap-southeast-1/README.md`](../ap-southeast-1/README.md) — main production region.
+- [`../README.md`](../README.md) — dev env overview, pre-flight, run.
+- [`../ap-southeast-1/README.md`](../ap-southeast-1/README.md) — main dev region.

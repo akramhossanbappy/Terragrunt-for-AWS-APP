@@ -47,6 +47,8 @@ module "opensearch" {
 }
 
 module "kibana-alb" {
+  count = var.create_kibana_alb ? 1 : 0
+
   source                 = "../kibana-alb"
   project                = var.project
   environment            = var.environment
@@ -59,3 +61,4 @@ module "kibana-alb" {
 
   depends_on = [module.opensearch]
 }
+
