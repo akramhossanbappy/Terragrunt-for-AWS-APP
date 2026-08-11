@@ -165,3 +165,4 @@ terragrunt run-all apply --terragrunt-non-interactive --terragrunt-parallelism 1
 confirmation prompt — make sure `plan` output has been reviewed first.
 
 Will run from env or region
+then run the terragrunt init --all
